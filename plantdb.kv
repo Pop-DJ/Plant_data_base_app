@@ -1,0 +1,120 @@
+#: import main main
+#: import ListAdapter kivy.adapters.listadapter.ListAdapter
+#: import ListItemButton kivy.uix.listview.ListItemButton
+
+
+    
+<PlantDB>:
+    orientation: "vertical"
+    plant_name_text_input: plant_name
+    date_text_input: date
+    plant_list:  plant_list_view
+    padding: 10
+    spacing: 10
+        
+        
+    BoxLayout:  
+        size_hint_y: None
+        height: "42dp"
+     
+        Label:
+            text: "Plant Name" 
+        TextInput: 
+            id: plant_name
+        Label:
+            text: "Date"
+        TextInput: 
+            id: date
+        Widget:
+    BoxLayout:
+        size_hint_y: None
+        height: "42dp"
+        Button:
+            text: "New Plant"
+            size_hint_x: 15
+            on_press: root.plant_plant()
+        Button:
+            text: "Load"
+            size_hint_x: 15
+            on_press: root.load_list()
+        Button:
+            text: "View Plant"
+            size_hint_x: 15
+            on_press:
+             
+                root.plant_view()
+                 
+                root.manager.transition.direction ="left" 
+                root.manager.transition.duration = 0 
+                root.manager.current = "Plant_View" 
+        Button:
+            text: "Update Plant"
+            size_hint_x: 15
+            on_press:
+                
+                root.plant_edit()
+                root.manager.transition.direction ="left" 
+                root.manager.transition.duration = 0 
+                root.manager.current = "Plant_Edit" 
+     
+ 
+            
+    ListView:
+        id: plant_list_view
+        adapter:
+            ListAdapter(data=[], cls=main.PlantListButton)
+            
+<PlantEdit>:
+    orientation: "vertical"
+    plant_info_text_input: plant_info
+ 
+    padding: 10
+    spacing: 10
+    BoxLayout:
+        size_hint_y: None
+        height: "42dp"
+        Label:
+            text: root.tempx
+    BoxLayout:
+        TextInput:
+            id: plant_info
+            size_hint_y: .69
+    BoxLayout:
+        Button:
+            text: "Update"
+            size_hint_x: 15
+            on_press:
+                root.plant_update()
+                root.manager.transition.direction ="left"
+                root.manager.transition.duration = 0
+                root.manager.current = "Plant_DB"
+                
+<PlantView>: 
+    orientation: "vertical"
+    
+    padding: 10
+    spacing: 10
+    BoxLayout:
+        size_hint_y: None
+        height: "42dp"
+        Label:
+            text: root.tempx
+    BoxLayout:
+        size_hint_y: None
+        height: "300dp"
+     
+        Label:
+            text: root.tempy
+            
+                
+    BoxLayout:
+        
+        Button:
+            text: "Leave"
+            size_hint_x: 15
+            on_press:
+             
+                root.manager.transition.direction ="left"
+                root.manager.transition.duration = 0
+                root.manager.current = "Plant_DB"
+     
